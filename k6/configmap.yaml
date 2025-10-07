@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-scripts
+data:
+  cpu.js: |
+    import http from 'k6/http';
+    import { sleep } from 'k6';
+    export const options = {
+      vus: 5, duration: '60s'   // 5 virtual users for 1 minute
+    };
+    const BASE = __ENV.BASE_URL || 'http://app:3000';
+    export default function () {
+      http.get(`${BASE}/cpu?ms=250`);
+      sleep(0.2);
+    }
+
+  mem.js: |
+    import http from 'k6/http';
+    import { sleep } from 'k6';
+    export const options = {
+      vus: 3, duration: '90s'
+    };
+    const BASE = __ENV.BASE_URL || 'http://app:3000';
+    export default function () {
+      http.get(`${BASE}/mem?mb=100&holdSec=20`);
+      sleep(1);
+    }

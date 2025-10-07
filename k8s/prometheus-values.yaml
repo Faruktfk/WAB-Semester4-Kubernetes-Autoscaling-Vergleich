@@ -1,0 +1,19 @@
+server:
+  service:
+    type: ClusterIP
+
+kubeStateMetrics:
+  enabled: true
+prometheus-node-exporter:
+  enabled: true
+
+extraScrapeConfigs: |
+  - job_name: 'node-app'
+    kubernetes_sd_configs:
+      - role: endpoints
+        namespaces:
+          names: ['prototype']
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_service_name]
+        action: keep
+        regex: app
