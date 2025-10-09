@@ -89,3 +89,14 @@ rm -rf ~/.minikube
 rm -rf ~/.kube
 rm -rf ~/.helm
 ```
+
+
+---
+
+# How to import Grafana dashboard:
+- After Port-Forwarding Grafana to e.i. localhost:3000
+- Visit "http://localhost:3000"
+- Navigate to "Dashboards" and click "New"
+- Select "Import" and upload the `WAB4-Grafana-Dashboard.json` file.
+
+The dashboard should appear among other dashboards.
